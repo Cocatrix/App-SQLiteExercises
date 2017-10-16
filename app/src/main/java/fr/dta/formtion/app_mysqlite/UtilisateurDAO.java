@@ -10,18 +10,19 @@ import java.util.List;
 
 /**
  * Created by thomas on 16/10/2017.
+ * Wiiiiith... Almost no coffee...
  */
 
 public class UtilisateurDAO  {
 
-    UserDataSource usrDataSource;
+    private UserDataSource usrDataSource;
 
-    final String TABLE_NAME = "User";
-    final String COL_FIRSTNAME= "COL_FIRSTNAME";
-    final String COL_LASTNAME= "COL_LASTNAME";
-    final String COL_AGE= "COL_AGE";
-    final String COL_JOB= "COL_JOB";
-    final String COL_ID = "COL_ID";
+    private final String TABLE_NAME = "User";
+    private final String COL_FIRSTNAME= "COL_FIRSTNAME";
+    private final String COL_LASTNAME= "COL_LASTNAME";
+    private final String COL_AGE= "COL_AGE";
+    private final String COL_JOB= "COL_JOB";
+    private final String COL_ID = "COL_ID";
 
     public UtilisateurDAO (UserDataSource userDataSource){
         this.usrDataSource = userDataSource;
@@ -53,7 +54,7 @@ public class UtilisateurDAO  {
         String[] clauseArgs = new String[]{String.valueOf(POJO.getId())};
 
         this.usrDataSource.getDb().update(TABLE_NAME, values, clause, clauseArgs);
-        // return the POJO
+
         return POJO;
     }
 
