@@ -3,24 +3,26 @@ package fr.dta.formtion.app_mysqlite;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by thomas on 16/10/2017.
+ * Wiiiiith... Almost no coffee...
  */
 
 public class UtilisateurDAO  {
 
-    UserDataSource usrDataSource;
+    private UserDataSource usrDataSource;
 
-    final String TABLE_NAME = "User";
-    final String COL_FIRSTNAME= "COL_FIRSTNAME";
-    final String COL_LASTNAME= "COL_LASTNAME";
-    final String COL_AGE= "COL_AGE";
-    final String COL_JOB= "COL_JOB";
-    final String COL_ID = "COL_ID";
+    private final String TABLE_NAME = "User";
+    private final String COL_FIRSTNAME= "COL_FIRSTNAME";
+    private final String COL_LASTNAME= "COL_LASTNAME";
+    private final String COL_AGE= "COL_AGE";
+    private final String COL_JOB= "COL_JOB";
+    private final String COL_ID = "COL_ID";
 
     public UtilisateurDAO (UserDataSource userDataSource){
         this.usrDataSource = userDataSource;
@@ -36,6 +38,8 @@ public class UtilisateurDAO  {
 
         int id = (int) this.usrDataSource.getDb().insert(TABLE_NAME, null, values);
         POJO.setId(id);
+
+
         return POJO;
     }
 
@@ -50,7 +54,7 @@ public class UtilisateurDAO  {
         String[] clauseArgs = new String[]{String.valueOf(POJO.getId())};
 
         this.usrDataSource.getDb().update(TABLE_NAME, values, clause, clauseArgs);
-        // return the POJO
+
         return POJO;
     }
 
@@ -77,7 +81,7 @@ public class UtilisateurDAO  {
 
     public List<Users> readAll() {
 
-        String[] allColumns = new String[]{COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_AGE, COL_JOB};
+        String[] allColumns = new String[]{COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_JOB,COL_AGE};
 
         Cursor cursor = usrDataSource.getDb().query(TABLE_NAME, allColumns, null, null, null, null, null);
         List<Users> users = new ArrayList<Users>();

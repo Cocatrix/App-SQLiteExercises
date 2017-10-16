@@ -9,7 +9,7 @@ import android.content.ContentValues;
 public class Users {
 
 
-    int id;
+    int id=-1;
     String firstName;
     String lastName;
     String job;
