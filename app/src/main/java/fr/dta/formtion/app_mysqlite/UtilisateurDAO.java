@@ -3,6 +3,7 @@ package fr.dta.formtion.app_mysqlite;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,8 @@ public class UtilisateurDAO  {
 
         int id = (int) this.usrDataSource.getDb().insert(TABLE_NAME, null, values);
         POJO.setId(id);
+
+
         return POJO;
     }
 
@@ -77,7 +80,7 @@ public class UtilisateurDAO  {
 
     public List<Users> readAll() {
 
-        String[] allColumns = new String[]{COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_AGE, COL_JOB};
+        String[] allColumns = new String[]{COL_ID, COL_FIRSTNAME, COL_LASTNAME, COL_JOB,COL_AGE};
 
         Cursor cursor = usrDataSource.getDb().query(TABLE_NAME, allColumns, null, null, null, null, null);
         List<Users> users = new ArrayList<Users>();

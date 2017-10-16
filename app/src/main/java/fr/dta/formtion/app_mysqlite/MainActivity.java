@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -20,6 +20,10 @@ public class MainActivity extends AppCompatActivity  {
     List<Users> userPool = new ArrayList<>();
     ImageButton button;
 
+    RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
     ListView myListView;
 
@@ -28,9 +32,8 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        myListView = (ListView) findViewById(R.id.listView);
-        source = new UserDataSource(context);
-        source.open();
+
+        source = UserDataSource.getInstance(context);
         utilisateur = source.newUtilisateurDAO();
 
 
@@ -50,17 +53,12 @@ public class MainActivity extends AppCompatActivity  {
 
         userPool= utilisateur.readAll();
 
-        Log.d("Lecture :" , " la pool est constituée de "+userPool.toString());
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(mLayoutManager);
 
-        //Array of Strings needed in order to get only the names for the adapter
-        String[] namePool = new String[userPool.size()];
-        for(int i = 0 ; i<userPool.size();i++){
-            namePool[i]= userPool.get(i).getFirstName();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, namePool);
-        myListView.setAdapter(adapter);
+        mAdapter = new MyAdapter(userPool);
+        recyclerView.setAdapter(mAdapter);
 
 
 

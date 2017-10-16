@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class UserDataSource {
     public UserDBHelper helper;
     private SQLiteDatabase db;
+    public static UserDataSource usrDataSource;
 
     public UserDataSource(Context context){
         helper = new UserDBHelper(context);
@@ -27,6 +28,15 @@ public class UserDataSource {
 
     public void close(){
         helper.close();
+    }
+
+
+    public synchronized static UserDataSource getInstance(Context context){
+        if(usrDataSource==null){
+            usrDataSource = new UserDataSource(context);
+            usrDataSource.open();
+        }
+        return usrDataSource;
     }
 
     //Factories

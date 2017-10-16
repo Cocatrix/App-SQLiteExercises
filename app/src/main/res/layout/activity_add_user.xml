@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="fr.dta.formtion.app_mysqlite.AddUserActivity"
     android:orientation="vertical"
-    android:weightSum="5">
+    android:weightSum="6">
 
     <EditText
         android:id="@+id/firstName"
@@ -56,4 +56,11 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Add the User" />
+
+    <Button
+        android:id="@+id/buttonReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Back" />
 </LinearLayout>
