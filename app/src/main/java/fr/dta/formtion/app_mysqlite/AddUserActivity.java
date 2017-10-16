@@ -1,11 +1,13 @@
 package fr.dta.formtion.app_mysqlite;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class AddUserActivity extends AppCompatActivity {
 
@@ -18,6 +20,7 @@ public class AddUserActivity extends AppCompatActivity {
     EditText jobET;
     EditText ageET;
     Button button;
+    Button goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +33,20 @@ public class AddUserActivity extends AppCompatActivity {
         ageET = (EditText) findViewById(R.id.ageInput);
 
         button = (Button) findViewById(R.id.addUser);
+        goBack = (Button) findViewById(R.id.buttonReturn);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addTheUser();
+            }
+        });
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AddUserActivity.this, MainActivity.class);
+                startActivity(intent);
+
             }
         });
 
@@ -54,7 +66,10 @@ public class AddUserActivity extends AppCompatActivity {
 
         Users newUser = new Users(firstName, lastName, job, age);
 
-        utilisateur.create(newUser);
+        Users test = utilisateur.create(newUser);
+        if(newUser.getId()!=-1){
+            Toast.makeText(this, "The User has been added", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
