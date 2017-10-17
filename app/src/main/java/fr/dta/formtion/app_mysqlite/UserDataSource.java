@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UserDataSource {
     public UserDBHelper helper;
-    private SQLiteDatabase db;
+    public SQLiteDatabase db;
     public static UserDataSource usrDataSource;
 
     public UserDataSource(Context context){
